@@ -1,0 +1,17 @@
+overwrite: true
+schema:
+  - http://localhost:5100/local/graphql:
+      headers:
+        Authorization: 'schema'
+generates:
+  generated/index.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+    config:
+      scalars:
+        Date: Date
+        Decimal: import('@prisma/client/runtime').Decimal
+      skipTypename: true
+      wrapEntireFieldDefinitions: true
+      entireFieldWrapperValue: T | (() => T | Promise<T>)
